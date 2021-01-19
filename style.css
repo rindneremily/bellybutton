@@ -1,0 +1,8 @@
+.jumbotron {
+    background-image: url("jumbotron.jpg");
+    background-size: 100% 100%;
+    color: white
+}
+body {
+    background-color: mintcream;
+}

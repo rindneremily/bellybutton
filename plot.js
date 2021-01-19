@@ -59,7 +59,7 @@ function buildCharts(sample) {
   d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
     var samples = data.samples;
-    var metadata = data.metadata
+    var metadata = data.metadata;
     // 4. Create a variable that filters the samples for the object with the desired sample number.
     var filterArray = samples.filter(sampleObject => sampleObject.id == sample);
     var result = filterArray[0];
@@ -69,7 +69,7 @@ function buildCharts(sample) {
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otu_ids = result.otu_ids;
     var otu_labels = result.otu_labels;
-    var sample_values = result.sample_values
+    var sample_values = result.sample_values;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -113,7 +113,8 @@ function buildCharts(sample) {
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
       title: "Bacteria Cultures per Sample",
-      showlegend: false
+      showlegend: false,
+      hovermode: "closest"
     };
 
     // 3. Use Plotly to plot the data with the layout.
@@ -122,7 +123,7 @@ function buildCharts(sample) {
     // 1. Create a variable that filters the metadata array for the object with the desired sample number.
     var metadada = data.metadata;
     // Create a variable that holds the first sample in the array.
-    var filterMetadata = metadata.filter(sampleObject => sampleObject.id ==sample);
+    var filterMetadata = metadata.filter(sampleObject => sampleObject.id == sample);
     var metadataResult = filterMetadata[0];
     // 2. Create a variable that holds the first sample in the metadata array.
     
@@ -139,9 +140,9 @@ function buildCharts(sample) {
         mode: "gauge+number",
         gauge: {
           bar: {color: "black"},
-          axis: {range: (0, 10)},
+          axis: {visible: true, range: [0, 10]},
           steps: [
-            {range: [0, 2], color: "lavendar"},
+            {range: [0, 2], color: "lavender"},
             {range: [2, 4], color: "thistle"},
             {range: [4, 6], color: "lightsteelblue"},
             {range: [6, 8], color: "lightblue"},
