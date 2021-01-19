@@ -59,6 +59,7 @@ function buildCharts(sample) {
   d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
     var samples = data.samples;
+    var metadata = data.metadata
     // 4. Create a variable that filters the samples for the object with the desired sample number.
     var filterArray = samples.filter(sampleObject => sampleObject.id == sample);
     var result = filterArray[0];
@@ -117,5 +118,48 @@ function buildCharts(sample) {
 
     // 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
+    var metadada = data.metadata;
+    // Create a variable that holds the first sample in the array.
+    var filterMetadata = metadata.filter(sampleObject => sampleObject.id ==sample);
+    var metadataResult = filterMetadata[0];
+    // 2. Create a variable that holds the first sample in the metadata array.
+    
+
+    // 3. Create a variable that holds the washing frequency.
+    var washfreq = metadataResult.washfreq; 
+
+    
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [
+      {
+        value: washfreq,
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+          bar: {color: "black"},
+          axis: {range: (0, 10)},
+          steps: [
+            {range: [0, 2], color: "lavendar"},
+            {range: [2, 4], color: "thistle"},
+            {range: [4, 6], color: "lightsteelblue"},
+            {range: [6, 8], color: "lightblue"},
+            {range: [8, 10], color: "yellowgreen"}
+          ],
+        }
+
+      }
+     
+    ];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout = { 
+      title: "Belly Button Washing Frequency <br> Scrubs per Week"
+      
+    };
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout)
   });
 }
